@@ -4,6 +4,7 @@ import java.sql.*;
 import java.time.*;
 import java.util.*;
 
+import static com.ipartek.formacion.bibliotecask.Consolak.*;
 //-------------------------------------
 //-------------------------------------
 
@@ -37,7 +38,8 @@ public class EjemploJDBC {
            
 			while(true) {
 			mostrarMenu();
-            System.out.print("Ingrese el número de la opción: ");
+            System.out.print("\u001B[34mIngrese el número de la opción: \u001B[0m");
+            
             int opcion = sc.nextInt();
             
             switch (opcion) {
@@ -77,26 +79,27 @@ public class EjemploJDBC {
 	}
 
 	private static void listar() {
-		System.out.println("Ahí va tu listado: ");
+		pln("Hola soy la consola");
+		pln("Ahí va tu listado: ");
 		listado();
-		System.out.println("\u001B[132mListado generado con éxito\u001b[0m "); //rojo
+		pln("\u001B[32mListado generado con éxito\u001b[0m "); //verde
 	}
 
 	private static void borrar() {
-		System.out.print("\u001B[34mIngrese el ID para borrar: \u001B[0m");
+		pln("\u001B[34mIngrese el ID para borrar: \u001B[0m");
 		long idBorrar = sc.nextLong();
 		borrar(idBorrar);
-		System.out.println("\u001B[132mBorrado registro con éxito\u001b[0m");
+		pln("\u001B[32mBorrado registro con éxito\u001b[0m");
 	}
 
 	private static void buscar() {
-		System.out.println("\u001B[34mIngrese el ID a Buscar: \u001B[0m"); //azul
+		pln("\u001B[34mIngrese el ID a Buscar: \u001B[0m"); //azul
 		long id = sc.nextLong();
 		obtenerPorId(id);
 	}
 
 	private static void actualizar() {
-		System.out.println("\\u001B[34mIngrese el ID para actualizar: \u001B[0m");
+		pln("\\u001B[34mIngrese el ID para actualizar: \u001B[0m");
 		long idUpdate = sc.nextLong();
 		obtenerPorId(idUpdate);
 		System.out.println("\u001B[34mInsertando...\u001B[0m");// METER OTRO SWITCH 
@@ -119,24 +122,24 @@ public class EjemploJDBC {
 	}
 
 	private static void insertar() {
-		System.out.println("\u001b[4;31mInsertando...\u001B[0m");
-		System.out.println("DNI: ");
+		pln("\u001b[4;31mInsertando...\u001B[0m");
+		pln("DNI: ");
 		String dni = sc.next();
-		System.out.println("DNI Diferencial: ");
+		pln("DNI Diferencial: ");
 		int dniDiferencial = sc.nextInt();
-		System.out.println("Nombre: ");
+		pln("Nombre: ");
 		String nombre = sc.next();
-		System.out.println("Apellidos: ");
+		pln("Apellidos: ");
 		String apellidos = sc.next();
-		System.out.println("Fecha de Nacimiento: (AAAA-MM-DD) ");
+		pln("Fecha de Nacimiento: (AAAA-MM-DD) ");
 		LocalDate fechaNacimiento = LocalDate.parse(sc.next());
 		insertar(dni, dniDiferencial, nombre, apellidos, fechaNacimiento);
 		listado();
-		System.out.println("\u001b[4;31mAgregado registro con éxito\u001b[0m "); //rojo
+		pln("\u001b[4;31mAgregado registro con éxito\u001b[0m "); //rojo
 	}
 
 	private static void mostrarMenu() {
-		System.out.println(""" 
+		pln(""" 
 				
 				-----------------------------
 				
