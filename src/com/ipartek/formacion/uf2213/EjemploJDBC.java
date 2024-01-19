@@ -26,6 +26,7 @@ public class EjemploJDBC {
 	private static final int ACTUALIZAR = 2;
 	private static final int BORRAR = 3;
 	private static final int LISTADO = 4;
+	private static final int SALIR = 5;
 
 	private static Connection con;
 	
@@ -35,33 +36,15 @@ public class EjemploJDBC {
 		
 		try {
 			con = DriverManager.getConnection(URL, USER, PASS);
-           
-			while(true) {
+			
+			int opcion;
+			
+			do {
 			mostrarMenu();
-            System.out.print("\u001B[34mIngrese el número de la opción: \u001B[0m");
-            
-            int opcion = sc.nextInt();
-            
-            switch (opcion) {
-            case BUSCAR:
-            	buscar();
-            	break;
-            case INSERTAR:
-				insertar();
-                break;
-            case ACTUALIZAR:
-                actualizar();
-                break;
-            case BORRAR:
-                borrar();
-                break;
-            case LISTADO:
-            	listar();
-            	break;
-            default:
-                System.err.println("Opción no válida");
-            	}          
-			}
+            opcion = pedirOpcion();
+            ejecutarOpcion(opcion);          
+            } while(opcion != SALIR);
+			
 		} catch (SQLException e) {
 			System.err.println("Error al conectar a la base de datos");
 			System.err.println(e.getMessage());
@@ -78,6 +61,36 @@ public class EjemploJDBC {
 		}
 	}
 
+	private static void ejecutarOpcion(int opcion) {
+		pln("Ejecutando opción " + opcion);
+		switch (opcion) {
+		case BUSCAR:
+			buscar();
+			break;
+		case INSERTAR:
+			insertar();
+		    break;
+		case ACTUALIZAR:
+		    actualizar();
+		    break;
+		case BORRAR:
+		    borrar();
+		    break;
+		case LISTADO:
+			listar();
+			break;
+		case SALIR:
+			System.out.println("Gracias por utilizar esta aplicación");
+			break;
+		default:
+		    System.err.println("Opción no válida");
+			}
+	}
+	
+	private static int pedirOpcion() {
+		return leerInt("\u001B[34mIntroduce la opción elegida\u001b[0m");
+	}
+	
 	private static void listar() {
 		pln("Hola soy la consola");
 		pln("Ahí va tu listado: ");
@@ -93,13 +106,13 @@ public class EjemploJDBC {
 	}
 
 	private static void buscar() {
-		pln("\u001B[34mIngrese el ID a Buscar: \u001B[0m"); //azul
-		long id = sc.nextLong();
+
+		long id = leerLong("\u001B[34mIngrese el ID a Buscar: \u001B[0m");
 		obtenerPorId(id);
 	}
 
 	private static void actualizar() {
-		pln("\\u001B[34mIngrese el ID para actualizar: \u001B[0m");
+		pln("\u001B[34mIngrese el ID para actualizar: \u001B[0m");
 		long idUpdate = sc.nextLong();
 		obtenerPorId(idUpdate);
 		System.out.println("\u001B[34mInsertando...\u001B[0m");// METER OTRO SWITCH 
@@ -122,19 +135,17 @@ public class EjemploJDBC {
 	}
 
 	private static void insertar() {
-		pln("\u001b[4;31mInsertando...\u001B[0m");
-		pln("DNI: ");
-		String dni = sc.next();
-		pln("DNI Diferencial: ");
-		int dniDiferencial = sc.nextInt();
-		pln("Nombre: ");
-		String nombre = sc.next();
-		pln("Apellidos: ");
-		String apellidos = sc.next();
-		pln("Fecha de Nacimiento: (AAAA-MM-DD) ");
-		LocalDate fechaNacimiento = LocalDate.parse(sc.next());
+		pln("\u001b[1;31mInsertando...\u001B[0m");
+		String dni = leerString("DNI");
+		Integer dniDiferencial = leerInt("DNI diferencial");
+		String nombre = leerString("Nombre");
+		String apellidos = leerString("Apellidos");
+		LocalDate fechaNacimiento = leerFecha("Fecha de nacimiento (AAAA-MM-DD]");
+
 		insertar(dni, dniDiferencial, nombre, apellidos, fechaNacimiento);
+		
 		listado();
+		
 		pln("\u001b[4;31mAgregado registro con éxito\u001b[0m "); //rojo
 	}
 
@@ -150,6 +161,7 @@ public class EjemploJDBC {
 				2. Actualizar
 				3. Borrar
 				4. Listado
+				5. Salir
 				
 				-----------------------------    
 				
