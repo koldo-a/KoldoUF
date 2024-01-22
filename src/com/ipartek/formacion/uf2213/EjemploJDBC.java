@@ -1,12 +1,13 @@
 package com.ipartek.formacion.uf2213;
 
+import static com.ipartek.formacion.bibliotecask.Consolak.*;
+
+//-------------------------------------
+//-------------------------------------
+
 import java.sql.*;
 import java.time.*;
 import java.util.*;
-
-import static com.ipartek.formacion.bibliotecask.Consolak.*;
-//-------------------------------------
-//-------------------------------------
 
 public class EjemploJDBC {
 	private static final String URL = "jdbc:mysql://localhost:3306/manana_tienda";
@@ -62,7 +63,7 @@ public class EjemploJDBC {
 	}
 
 	private static void ejecutarOpcion(int opcion) {
-		pln("Ejecutando opción " + opcion);
+		plnAzul("Ejecutando opción " + opcion);
 		switch (opcion) {
 		case BUSCAR:
 			buscar();
@@ -80,7 +81,7 @@ public class EjemploJDBC {
 			listar();
 			break;
 		case SALIR:
-			System.out.println("Gracias por utilizar esta aplicación");
+			plnAmarillo("Gracias por utilizar esta aplicación");
 			break;
 		default:
 		    System.err.println("Opción no válida");
@@ -92,50 +93,50 @@ public class EjemploJDBC {
 	}
 	
 	private static void listar() {
-		pln("Hola soy la consola");
-		pln("Ahí va tu listado: ");
+		plnAmarillo("Hola soy la consola");
+		plnAzul("Ahí va tu listado: ");
 		listado();
-		pln("\u001B[32mListado generado con éxito\u001b[0m "); //verde
+		plnVerde("Listado generado con éxito"); 
 	}
 
 	private static void borrar() {
-		pln("\u001B[34mIngrese el ID para borrar: \u001B[0m");
+		plnAzul("Ingrese el ID para borrar:");
 		long idBorrar = sc.nextLong();
 		borrar(idBorrar);
-		pln("\u001B[32mBorrado registro con éxito\u001b[0m");
+		plnVerde("Borrado registro con éxito");
 	}
 
 	private static void buscar() {
 
-		long id = leerLong("\u001B[34mIngrese el ID a Buscar: \u001B[0m");
+		long id = leerLong("Ingrese el ID a Buscar:");
 		obtenerPorId(id);
 	}
 
 	private static void actualizar() {
-		pln("\u001B[34mIngrese el ID para actualizar: \u001B[0m");
+		plnAzul("Ingrese el ID para actualizar:");
 		long idUpdate = sc.nextLong();
 		obtenerPorId(idUpdate);
-		System.out.println("\u001B[34mInsertando...\u001B[0m");// METER OTRO SWITCH 
-		System.out.println("DNI: ");
+		plnAzul("Insertando...");// METER OTRO SWITCH 
+		pln("DNI: ");
 		String dniUpdate = sc.next();
-		System.out.println("DNI Diferencial: ");
+		pln("DNI Diferencial: ");
 		int dniDiferencialUpdate = sc.nextInt();
-		System.out.println("Nombre: ");
+		pln("Nombre: ");
 		String nombreUpdate = sc.next();
-		System.out.println("Apellidos: ");
+		pln("Apellidos: ");
 		String apellidosUpdate = sc.next();
-		System.out.println("Fecha de Nacimiento: (AAAA-MM-DD) ");
+		pln("Fecha de Nacimiento: (AAAA-MM-DD) ");
 		LocalDate fechaNacimientoUpdate = LocalDate.parse(sc.next());
 		
 		modificar(idUpdate, dniUpdate, dniDiferencialUpdate, nombreUpdate, apellidosUpdate, fechaNacimientoUpdate);
 		listado();
 		obtenerPorId(idUpdate);
-		System.out.println("--------------------------------");
-		System.out.println("Actualizado registro con éxito: " + idUpdate + " - " + dniUpdate + " - " + dniDiferencialUpdate + " - " + nombreUpdate + " - " + apellidosUpdate + " - " + fechaNacimientoUpdate);
+		pln("--------------------------------");
+		plnVerde("Actualizado registro con éxito: " + idUpdate + " - " + dniUpdate + " - " + dniDiferencialUpdate + " - " + nombreUpdate + " - " + apellidosUpdate + " - " + fechaNacimientoUpdate);
 	}
 
 	private static void insertar() {
-		pln("\u001b[1;31mInsertando...\u001B[0m");
+		plnAzul("Insertando...");
 		String dni = leerString("DNI");
 		Integer dniDiferencial = leerInt("DNI diferencial");
 		String nombre = leerString("Nombre");
@@ -146,12 +147,12 @@ public class EjemploJDBC {
 		
 		listado();
 		
-		pln("\u001b[4;31mAgregado registro con éxito\u001b[0m "); //rojo
+		plnRojo("Agregado registro con éxito");
 	}
 
 	private static void mostrarMenu() {
+
 		pln(""" 
-				
 				-----------------------------
 				
 				Seleccione una opción:
@@ -164,7 +165,6 @@ public class EjemploJDBC {
 				5. Salir
 				
 				-----------------------------    
-				
 						"""
 		);
 	}

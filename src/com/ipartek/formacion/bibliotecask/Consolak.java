@@ -5,10 +5,32 @@ import java.time.format.*;
 import java.util.*;
 
 public class Consolak {
+	
 	private static final Scanner sc = new Scanner(System.in);
 	
 	public static void pln(String mensaje) {
 		System.out.println(mensaje);
+	}
+	
+	public static void plnRojo (String mensaje) {
+		String ansiInicial = Colores.rojo;
+		String ansiFinal = Colores.normal;
+		pln(ansiInicial + mensaje + ansiFinal);
+	}
+	public static void plnAzul (String mensaje) {
+		String ansiInicial = Colores.azul;
+		String ansiFinal = Colores.normal;
+		pln(ansiInicial + mensaje + ansiFinal);
+	}
+	public static void plnVerde (String mensaje) {
+		String ansiInicial = Colores.verde;
+		String ansiFinal = Colores.normal;
+		pln(ansiInicial + mensaje + ansiFinal);
+	}
+	public static void plnAmarillo (String mensaje) {
+		String ansiInicial = Colores.amarillo;
+		String ansiFinal = Colores.normal;
+		pln(ansiInicial + mensaje + ansiFinal);
 	}
 	
 	public static String leerString(String mensaje) {
@@ -31,7 +53,7 @@ public class Consolak {
 				l = Long.parseLong(dato);
 				hayError = false;
 			} catch (NumberFormatException e) {
-				System.out.println("El número debe ser un entero entre " + Long.MIN_VALUE + " y " + Long.MAX_VALUE);
+				plnRojo("El número debe ser un entero entre " + Long.MIN_VALUE + " y " + Long.MAX_VALUE);
 			}
 		} while (hayError);
 
@@ -56,7 +78,7 @@ public class Consolak {
 				i = Integer.parseInt(dato);
 				hayError = false;
 			} catch (NumberFormatException e) {
-				System.out.println("El número debe ser un entero entre " + Integer.MIN_VALUE + " y " + Integer.MAX_VALUE);
+				plnRojo("El número debe ser un entero entre " + Integer.MIN_VALUE + " y " + Integer.MAX_VALUE);
 			}
 		} while (hayError);
 
@@ -78,7 +100,7 @@ public class Consolak {
 				fecha = LocalDate.parse(dato);
 				hayError = false;
 			} catch (DateTimeParseException e) {
-				System.out.println("La fecha debe ser válida");
+				plnRojo("La fecha debe ser válida");
 			}
 		} while (hayError);
 		
