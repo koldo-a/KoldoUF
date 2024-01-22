@@ -12,29 +12,71 @@ public class Consolak {
 		System.out.println(mensaje);
 	}
 	
-	public static void plnRojo (String mensaje) {
-		String ansiInicial = Colores.rojo;
-		String ansiFinal = Colores.normal;
-		pln(ansiInicial + mensaje + ansiFinal);
-	}
-	public static void plnAzul (String mensaje) {
-		String ansiInicial = Colores.azul;
-		String ansiFinal = Colores.normal;
-		pln(ansiInicial + mensaje + ansiFinal);
-	}
-	public static void plnVerde (String mensaje) {
-		String ansiInicial = Colores.verde;
-		String ansiFinal = Colores.normal;
-		pln(ansiInicial + mensaje + ansiFinal);
-	}
-	public static void plnAmarillo (String mensaje) {
-		String ansiInicial = Colores.amarillo;
-		String ansiFinal = Colores.normal;
-		pln(ansiInicial + mensaje + ansiFinal);
-	}
-	
+    public static void plnColor(String mensaje, String color) {
+        String ansiInicial = color;
+        String ansiFinal = Colores.normal;
+        pln(ansiInicial + mensaje + ansiFinal);
+    }
+    public static void plnColorNegr(String mensaje, String color) {
+    	String ansiInicial = color.replace("[", "[7;");
+    	String ansiFinal = Colores.normal;
+    	pln(ansiInicial + mensaje + ansiFinal);
+    }
+    public static void plnColorSub(String mensaje, String color) {
+    	String ansiInicial = color.replace("[", "[4;");
+    	String ansiFinal = Colores.normal;
+    	pln(ansiInicial + mensaje + ansiFinal);
+    }
+
+    public static void plnRojo(String mensaje) {
+        plnColor(mensaje, Colores.rojo);
+    }
+
+    public static void plnAzul(String mensaje) {
+        plnColor(mensaje, Colores.azul);
+    }
+
+    public static void plnVerde(String mensaje) {
+        plnColor(mensaje, Colores.verde);
+    }
+
+    public static void plnAmarillo(String mensaje) {
+        plnColor(mensaje, Colores.amarillo);
+    }
+    public static void plnRojoNegr(String mensaje) {
+    	plnColorNegr(mensaje, Colores.rojo);
+    }
+    
+    public static void plnAzulNegr(String mensaje) {
+    	plnColorNegr(mensaje, Colores.azul);
+    }
+    
+    public static void plnVerdeNegr(String mensaje) {
+    	plnColorNegr(mensaje, Colores.verde);
+    }
+    
+    public static void plnAmarilloNegr(String mensaje) {
+    	plnColorNegr(mensaje, Colores.amarillo);
+    }
+    
+    public static void plnRojoSub(String mensaje) {
+    	plnColorSub(mensaje, Colores.rojo);
+    }
+    
+    public static void plnAzulSub(String mensaje) {
+    	plnColorSub(mensaje, Colores.azul);
+    }
+    
+    public static void plnVerdeSub(String mensaje) {
+    	plnColorSub(mensaje, Colores.verde);
+    }
+    
+    public static void plnAmarilloSub(String mensaje) {
+    	plnColorSub(mensaje, Colores.amarillo);
+    }
+
 	public static String leerString(String mensaje) {
-		System.out.print(mensaje + ": ");
+		pln(mensaje + ": ");
 		return sc.nextLine();
 	}
 	
@@ -91,7 +133,7 @@ public class Consolak {
 		
 		do {
 			try {
-				String dato = leerString(mensaje + " [AAAA-MM-DD] ");
+				String dato = leerString(mensaje + " [AAAA-MM-DD]: ");
 
 				if(dato.trim().length() == 0) {
 					return null; 

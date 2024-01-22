@@ -96,14 +96,14 @@ public class EjemploJDBC {
 		plnAmarillo("Hola soy la consola");
 		plnAzul("Ahí va tu listado: ");
 		listado();
-		plnVerde("Listado generado con éxito"); 
+		plnVerdeNegr("Listado generado con éxito"); 
 	}
 
 	private static void borrar() {
 		plnAzul("Ingrese el ID para borrar:");
 		long idBorrar = sc.nextLong();
 		borrar(idBorrar);
-		plnVerde("Borrado registro con éxito");
+		plnVerdeNegr("Borrado registro con éxito");
 	}
 
 	private static void buscar() {
@@ -116,7 +116,7 @@ public class EjemploJDBC {
 		plnAzul("Ingrese el ID para actualizar:");
 		long idUpdate = sc.nextLong();
 		obtenerPorId(idUpdate);
-		plnAzul("Insertando...");// METER OTRO SWITCH 
+		plnAzulNegr("Insertando...");// METER OTRO SWITCH 
 		pln("DNI: ");
 		String dniUpdate = sc.next();
 		pln("DNI Diferencial: ");
@@ -125,14 +125,14 @@ public class EjemploJDBC {
 		String nombreUpdate = sc.next();
 		pln("Apellidos: ");
 		String apellidosUpdate = sc.next();
-		pln("Fecha de Nacimiento: (AAAA-MM-DD) ");
+		pln("Fecha de Nacimiento");
 		LocalDate fechaNacimientoUpdate = LocalDate.parse(sc.next());
 		
 		modificar(idUpdate, dniUpdate, dniDiferencialUpdate, nombreUpdate, apellidosUpdate, fechaNacimientoUpdate);
 		listado();
 		obtenerPorId(idUpdate);
 		pln("--------------------------------");
-		plnVerde("Actualizado registro con éxito: " + idUpdate + " - " + dniUpdate + " - " + dniDiferencialUpdate + " - " + nombreUpdate + " - " + apellidosUpdate + " - " + fechaNacimientoUpdate);
+		plnVerdeNegr("Actualizado registro con éxito: " + idUpdate + " - " + dniUpdate + " - " + dniDiferencialUpdate + " - " + nombreUpdate + " - " + apellidosUpdate + " - " + fechaNacimientoUpdate);
 	}
 
 	private static void insertar() {
@@ -141,13 +141,13 @@ public class EjemploJDBC {
 		Integer dniDiferencial = leerInt("DNI diferencial");
 		String nombre = leerString("Nombre");
 		String apellidos = leerString("Apellidos");
-		LocalDate fechaNacimiento = leerFecha("Fecha de nacimiento (AAAA-MM-DD]");
+		LocalDate fechaNacimiento = leerFecha("Fecha de nacimiento");
 
 		insertar(dni, dniDiferencial, nombre, apellidos, fechaNacimiento);
 		
 		listado();
 		
-		plnRojo("Agregado registro con éxito");
+		plnRojoNegr("Agregado registro con éxito");
 	}
 
 	private static void mostrarMenu() {
